@@ -1,4 +1,5 @@
 import React from 'react';
+import { nanoid } from 'nanoid'
 import Form from './components/Form/Form';
 import ContactList from './components/Contacts/Contacts';
 // import Filter from './components/Filter/Filter';
@@ -14,13 +15,21 @@ class App extends React.Component {
       {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
     ],
     filter: '',
-    name: '',
-    number: ''
+    // name: '',
+    // number: ''
   }
 
   formSubmit = data => {
     console.log(data)
+    const contact = {
+      ...data,
+      id: nanoid()
+    };
+    this.setState((prevState) => ({
+      contacts: [contact, ...prevState.contacts]
+    }))
   }
+
 
   deleteContact = (contactId) => {
     this.setState(prevState => ({
