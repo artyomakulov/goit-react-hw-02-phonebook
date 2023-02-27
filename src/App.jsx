@@ -18,14 +18,22 @@ class App extends React.Component {
   }
 
   formSubmit = data => {
+    const {contacts} = this.state
     console.log(data)
-    const contact = {
+    const searchName = contacts.map((contactName) => contactName.name.toLowerCase()).includes(data.name.toLowerCase());
+    if (searchName) {
+      alert(`${data.name} is already in contact`);
+      return;
+    }
+    else {
+         const contact = {
       ...data,
       id: nanoid()
     };
     this.setState((prevState) => ({
       contacts: [contact, ...prevState.contacts]
     }))
+    }
   }
 
   deleteContact = (contactId) => {
@@ -49,14 +57,14 @@ class App extends React.Component {
     const visibleContacts = this.getVisibleContacts();
 
     return (
-      <div className={css.section}>
-  <h1>Phonebook</h1>
-  <Form onSubmit={this.formSubmit}/>
+    <div className={css.section}>
+      <h1>Phonebook</h1>
+      <Form onSubmit={this.formSubmit}/>
 
-  <h2>Contacts</h2>
-  <Filter value={this.state.filter} onChange={this.changeFilter} />
-  <ContactList contacts={visibleContacts} onDeleteContact={this.deleteContact}/>
-</div>
+      <h2>Contacts</h2>
+      <Filter value={this.state.filter} onChange={this.changeFilter} />
+      <ContactList contacts={visibleContacts} onDeleteContact={this.deleteContact}/>
+    </div>
       
     )
   }
