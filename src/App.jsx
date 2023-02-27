@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid'
 import Form from './components/Form/Form';
 import ContactList from './components/Contacts/Contacts';
 import Filter from './components/Filter/Filter';
-
+import css from './App.module.css'
 
 
 class App extends React.Component {
@@ -15,8 +15,6 @@ class App extends React.Component {
       {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
     ],
     filter: '',
-    // name: '',
-    // number: ''
   }
 
   formSubmit = data => {
@@ -40,12 +38,18 @@ class App extends React.Component {
     this.setState({filter: e.currentTarget.value})
   }
 
+  getVisibleContacts = () => {
+    const {contacts, filter} = this.state;
+    const narmalizedFilter = filter.toLowerCase();
+    return contacts.filter(contact => contact.name.toLowerCase().includes(narmalizedFilter));
+  }
+    
+
   render () {
-  
-    const narmalizedFilter = this.state.filter.toLowerCase();
-    const visibleContacts = this.state.contacts.filter(contact => contact.name.toLowerCase().includes(narmalizedFilter));
+    const visibleContacts = this.getVisibleContacts();
+
     return (
-      <div>
+      <div className={css.section}>
   <h1>Phonebook</h1>
   <Form onSubmit={this.formSubmit}/>
 

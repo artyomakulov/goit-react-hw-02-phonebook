@@ -1,5 +1,6 @@
 .ContactList {
-width: 350px;
+width: 400px;
+padding-left: 0;
 }
 
 .ContactList_item {
@@ -7,7 +8,6 @@ width: 350px;
     align-items: center;
     justify-content: space-between;
     padding: 5px;
-    border: 1px solid grey;
 }
 
 .ContactList_btn {

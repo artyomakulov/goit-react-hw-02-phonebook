@@ -5,7 +5,7 @@ import css from './Contacts.module.css';
 
 export default function ContactList ({contacts, onDeleteContact}) {
     return (
-        <ul className={css.ContactList}>
+        <ol className={css.ContactList}>
             {contacts.map(({id, name, number}) => {
                 return (
                     <li className={css.ContactList_item} key={id}>
@@ -20,7 +20,7 @@ export default function ContactList ({contacts, onDeleteContact}) {
                     </li>
                 )
             })}
-        </ul>
+        </ol>
     )
 }
 
